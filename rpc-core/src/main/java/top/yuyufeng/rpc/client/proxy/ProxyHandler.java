@@ -22,8 +22,9 @@ import java.util.concurrent.*;
 
 /**
  * 动态代理处理程序
- * @date 2017/8/18.
+ *
  * @author yuyufeng
+ * @date 2017/8/18.
  */
 public class ProxyHandler implements InvocationHandler {
     private Class<?> service;
@@ -54,7 +55,7 @@ public class ProxyHandler implements InvocationHandler {
             return null;
         }
         Object result;
-        RpcResponse rpcResponse = (RpcResponse) MyNettyClient.send(rpcRequest,remoteAddress);
+        RpcResponse rpcResponse = (RpcResponse) MyNettyClient.send(rpcRequest, remoteAddress);
         result = rpcResponse.getResult();
         return result;
     }

@@ -9,7 +9,7 @@ import top.yuyufeng.rpc.service.HelloService;
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String words) {
-        System.out.println("hello:" + words);
+//        System.out.println("hello:" + words);
       /*  try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

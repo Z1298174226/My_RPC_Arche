@@ -26,14 +26,14 @@ public class MyServer {
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
 
-    public MyServer(int port,int threadSize) {
+    public MyServer(int port, int threadSize) {
         this.port = port;
         this.threadSize = threadSize;
     }
 
     public void start() {
-         bossGroup = new NioEventLoopGroup(threadSize);
-         workerGroup = new NioEventLoopGroup();
+        bossGroup = new NioEventLoopGroup(threadSize);
+        workerGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap sbs = new ServerBootstrap().group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).localAddress(new InetSocketAddress(port))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -54,23 +54,12 @@ public class MyServer {
             System.out.println("Rpc服务启动成功 " + port);
             future.channel().closeFuture().sync();
         } catch (Exception e) {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
+            shutdown();
         }
     }
 
-    public void shutdown(){
+    public void shutdown() {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
-    }
-
-    public static void main(String[] args) throws Exception {
-        int port;
-        if (args.length > 0) {
-            port = Integer.parseInt(args[0]);
-        } else {
-            port = 8080;
-        }
-        new MyServer(port,5).start();
     }
 }

@@ -44,7 +44,6 @@ public class MyNettyClient {
 
             ChannelFuture future = b.connect(inetSocketAddress.getAddress(), inetSocketAddress.getPort()).sync();
             future.channel().writeAndFlush(rpcRequest);
-
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
